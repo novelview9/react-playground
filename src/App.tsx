@@ -1,22 +1,27 @@
-import './App.css'
-import logo from './logo.svg'
+import { useContext, useState } from 'react'
+import { createContext } from 'vm'
+
+import ChildPortal from './Child'
+import { MyContext, MyProvider } from './context'
 
 function App() {
+  const [state, setState] = useState(true)
+
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>React Typescript Tailwind</p>
-        <a
-          className='App-link'
-          href='https://github.com/NirobxHasan/react-typescript-tailwind-boilerplate'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Git Project
-        </a>
-      </header>
-    </div>
+    <MyProvider>
+      <div className='border-2 border-blue-500'>
+        <p className='text-blue-500'>here is parent</p>
+        <p>{String(state)}</p>
+        <p>hello world</p>
+        <button onClick={() => setState(!state)} type='button'>
+          changed{' '}
+        </button>
+        <div>
+          <p>context:</p>
+        </div>
+      </div>
+      <ChildPortal />
+    </MyProvider>
   )
 }
 
